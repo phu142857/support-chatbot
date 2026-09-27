@@ -1,5 +1,5 @@
-function ScreenshotUpload({ onFileSelect }) {
-  const handleChange = (event) => {
+function ScreenshotUpload({ onFileSelect, onUpload }) {
+  const handleChange = async (event) => {
     const file = event.target.files?.[0];
 
     if (!file) {
@@ -11,6 +11,8 @@ function ScreenshotUpload({ onFileSelect }) {
     }
 
     onFileSelect(file);
+
+    await onUpload(file);
   };
 
   return (

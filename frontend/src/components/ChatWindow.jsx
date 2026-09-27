@@ -8,6 +8,8 @@ function ChatWindow({
   selectedFile,
   onFileSelect,
   onSend,
+  onUpload,
+  loading,
 }) {
   const [input, setInput] = useState("");
 
@@ -32,7 +34,7 @@ function ChatWindow({
 
         <span className="status">
           <span className="status-dot" />
-          Online
+          {loading ? "Processing..." : "Online"}
         </span>
       </header>
 
@@ -43,6 +45,14 @@ function ChatWindow({
             message={message}
           />
         ))}
+
+        {loading && (
+          <div className="message-row message-assistant">
+            <div className="message loading-message">
+              Analyzing screenshot...
+            </div>
+          </div>
+        )}
       </main>
 
       {selectedFile && (
@@ -64,6 +74,7 @@ function ChatWindow({
       >
         <ScreenshotUpload
           onFileSelect={onFileSelect}
+          onUpload={onUpload}
         />
 
         <input
@@ -71,11 +82,13 @@ function ChatWindow({
           value={input}
           onChange={(event) => setInput(event.target.value)}
           placeholder="Describe your problem..."
+          disabled={loading}
         />
 
         <button
           className="send-button"
           type="submit"
+          disabled={loading}
         >
           Send
         </button>

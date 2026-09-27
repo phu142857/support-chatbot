@@ -211,3 +211,13 @@ input {
     max-width: 85%;
   }
 }
+
+.loading-message {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.send-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
